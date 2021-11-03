@@ -1,0 +1,104 @@
+@use '../abstracts/elevation' as *;
+@use '../abstracts/breakpoints';
+
+.card {
+  padding: 1rem;
+  overflow: hidden;
+  border-radius: 5px;
+  width: fit-content;
+  position: relative;
+  @include elevation(1);
+
+  &__title {
+    display: grid;
+    grid-template-areas:
+      'icon title'
+      'icon subtitle';
+    grid-template-columns: 3.5rem 1fr;
+    height: 4.5rem;
+    margin: -1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+
+  &__icon {
+    overflow: hidden;
+    grid-area: icon;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+
+    &--shrink {
+      padding: 0.2rem;
+    }
+  }
+
+  &__image {
+    user-select: none;
+    background-color: rgba(255, 255, 255, 0.05);
+    margin: -1rem;
+  }
+
+  &__content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    @include breakpoints.t-portrait {
+      -webkit-line-clamp: 3;
+    }
+
+    @include breakpoints.laptop {
+      -webkit-line-clamp: 4;
+    }
+  }
+
+  &__button-group {
+    overflow: visible;
+    margin-left: -1rem;
+    margin-bottom: -1rem;
+    padding: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    margin-top: auto;
+    grid-area: buttons;
+  }
+}
+
+.card--info {
+  display: grid;
+  grid-template-areas:
+    'image title'
+    'image content'
+    'image buttons';
+  grid-template-columns: 6rem 1fr;
+  grid-template-rows: auto auto 1fr;
+  gap: 0.5rem;
+
+  @include breakpoints.t-portrait {
+    grid-template-columns: 10rem 1fr;
+  }
+
+  .card {
+    &__image {
+      margin-right: 0.5rem;
+      grid-area: image;
+
+      img {
+        height: 100%;
+        object-position: 50% 50%;
+        object-fit: cover;
+      }
+    }
+
+    &__content {
+      margin-top: -1rem;
+    }
+  }
+}
+
+.card--tile {
+  border-radius: 0;
+}

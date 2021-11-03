@@ -1,0 +1,19 @@
+$easing: (
+  standard: cubic-bezier(0.4, 0, 0.2, 1),
+  decelerate: cubic-bezier(0, 0, 0.2, 1),
+  accelerate: cubic-bezier(0.4, 0, 1, 1),
+  emphasize: cubic-bezier(0.55, 0, 0.1, 1),
+);
+
+@mixin animate($prop, $time, $speed: standard) {
+  $function: map-get(
+    $map: $easing,
+    $key: $speed,
+  );
+
+  @if $function == null {
+    @error 'Invalid timing. Must be "standard", "decelerate", "accelerate", or "emphasize".';
+  } @else {
+    transition: $prop $time $function;
+  }
+}

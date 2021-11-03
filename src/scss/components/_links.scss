@@ -1,0 +1,40 @@
+@use '../abstracts/functions' as *;
+@use '../abstracts/motion' as *;
+@use '../abstracts/colors';
+
+$color: map-deep-get(colors.$palette, primary, 200);
+$twitter: #1da1f2;
+
+.link {
+  color: $color;
+  position: relative;
+  width: max-content;
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background-color: $color;
+    transform: scaleX(0);
+    @include animate(transform, 225ms, 'decelerate');
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
+
+  &--twitter {
+    color: $twitter;
+
+    &::before {
+      content: '@';
+    }
+
+    &::after {
+      background-color: $twitter;
+    }
+  }
+}

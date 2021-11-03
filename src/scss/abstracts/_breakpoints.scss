@@ -1,0 +1,37 @@
+$breakpoints: (
+  phone: 300px,
+  t-portrait: 600px,
+  t-landscape: 905px,
+  laptop: 1240px,
+  desktop: 1440px,
+);
+
+@mixin phone {
+  @media screen and (min-width: map-get($map: $breakpoints, $key: phone)) {
+    @content;
+  }
+}
+
+@mixin t-portrait {
+  @media screen and (min-width: map-get($map: $breakpoints, $key: t-portrait)) {
+    @content;
+  }
+}
+
+@mixin t-landscape {
+  @media screen and (min-width: map-get($map: $breakpoints, $key: t-landscape)) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media screen and (min-width: map-get($map: $breakpoints, $key: laptop)) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: map-get($map: $breakpoints, $key: desktop)) {
+    @content;
+  }
+}

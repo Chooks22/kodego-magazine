@@ -1,0 +1,13 @@
+{
+  "name": "vite-project",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite src -c vite.config.js",
+    "build": "vite build src -c vite.config.js",
+    "serve": "vite preview src -c vite.config.js"
+  },
+  "devDependencies": {
+    "vite": "^2.6.4"
+  },
+  "license": "MIT"
+}

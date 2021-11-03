@@ -1,0 +1,111 @@
+@use '../abstracts/motion' as *;
+@use '../abstracts/colors' as *;
+@use '../abstracts/functions' as *;
+
+button {
+  all: unset;
+}
+
+@mixin icon-font {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.5rem;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.button {
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  border-radius: 3px;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background-color: #fff;
+    pointer-events: none;
+  }
+
+  /* overlay */
+  &::before {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    @include animate(opacity, 175ms);
+  }
+
+  &:hover::before {
+    opacity: 0.04;
+  }
+
+  &:focus::before {
+    opacity: 0.12;
+  }
+
+  /* ripple */
+  &::after {
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 0;
+    padding: 75% 0;
+    border-radius: 50%;
+    transform-origin: top left;
+    transform: scale(0) translateX(-50%) translateY(-50%);
+    @include animate(transform, 225ms, 'decelerate');
+    opacity: 0;
+  }
+
+  &:active::after {
+    opacity: 0.1;
+    transform: scale(1) translateX(-50%) translateY(-50%);
+  }
+
+  &--text {
+    $color: map-deep-get($palette, 'primary', 300);
+    height: 2.5rem;
+    padding: 0 0.5rem;
+    color: $color;
+
+    &::after,
+    &::before {
+      background-color: $color;
+    }
+  }
+
+  &--icon {
+    border-radius: 50%;
+    padding: 0.5rem;
+    margin: 0 -0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include icon-font;
+
+    &::before {
+      top: -25%;
+      left: -25%;
+      height: 150%;
+      width: 150%;
+      border-radius: 50%;
+    }
+  }
+}
